@@ -1,0 +1,45 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>>%date [%thread] %-5level %logger{10} [%file:%line] %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="TIME_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--<FileNamePattern>./logs/debug.%d{yyyy-MM-dd}.log</FileNamePattern>-->
+            <FileNamePattern>d:/test/logs/debug_time.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SIZE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>d:/test/logs/debug_size.%d{yyyy-MM-dd}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>d:/test/logs/debug_time.-%i.log.zip
+            </fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="TIME_FILE"/>
+        <appender-ref ref="SIZE_FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

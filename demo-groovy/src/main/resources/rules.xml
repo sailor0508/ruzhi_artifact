@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+	<context:property-placeholder location="classpath:context.properties" />
+	<context:annotation-config />
+
+	<!-- 配置动态加载的Bean，基于Spring的Resource支持，可从网络或本地文件获取Groovy代码 -->
+	<lang:groovy id="member" refresh-check-delay="2000"
+		script-source="${res.rootPath}/${groovy.script.packagePath}/MemberRule.groovy" />
+	
+	<!-- 先注释掉Order的规则，把注释起止符删除即可把Order规则动态添加到规则引擎中 -->
+	<!--<lang:groovy id="order" refresh-check-delay="2000"
+		script-source="${res.rootPath}/${res.projectPath}/${groovy.script.packagePath}/OrderRule.groovy" />-->
+	<lang:groovy id="order" refresh-check-delay="2000" script-source="${res.localPath}/OrderRule.groovy" />
+	<!-- 展示动态Bean之间可以互相调用的能力 -->
+	<lang:groovy id="proxy" refresh-check-delay="2000"
+		script-source="${res.rootPath}/${groovy.script.packagePath}/ProxyRule.groovy" />
+
+</beans>

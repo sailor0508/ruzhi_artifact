@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+    <h:head>
+
+    </h:head>
+
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="west" closable="true" collapsible="true">
+                <ui:include src="/common/leftPage.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" collapsible="true">
+                <h:form id="centerForm">
+                    <p:growl id="growl" showDetail="true" sticky="true"/>
+                    <h:outputText id="msgs" value="#{dataBean.message}#{dataBean.shopUrl}" style="color:red"/>
+                    <p:panel>
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <p:outputLabel value="shopUrl:"/>
+                            <p:inputText value="#{dataBean.shopUrl}" style="width:400px"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <p:commandButton actionListener="#{dataBean.lookShop}" id="searchOnline" update="centerForm"
+                                             value="测试"/>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </h:form>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+
+</f:view>
+</HTML>

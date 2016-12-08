@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h:form id="cityForm" prependId="true">
+            <p:panel id="cityList" header="城市信息维护" style="margin-bottom:20px">
+                <p:commandButton value="添加" type="button" onclick="cdAdd.show()"/>
+
+                <p:dataTable var="test" value="#{testView.tests}" rows="10" paginator="true">
+                    <f:facet name="header">
+                        城市信息列表
+                    </f:facet>
+                    <p:column headerText="编号" sortBy="#{test.f1}">
+                        <h:outputText value="#{test.f1}" />
+                    </p:column>
+                    <p:column headerText="名称" sortBy="#{test.f2}">
+                        <h:outputText value="#{test.f2}" />
+                    </p:column>
+                    <p:column headerTest="操作">
+                        <p:commandLink oncomplete="cd.show()" title="View Detail" update="@([id$=cityPanel])">
+                            <p:graphicImage value="/image/edit.jpg"/>
+                            <p:ajax event="click" update="cityPanel" />
+                            <f:setPropertyActionListener value="#{test}" target="#{testView.selectedTest}" />
+                        </p:commandLink>
+                        <p:commandLink oncomplete="cdDelete.show()" title="删除" update="@([id$=cityPanel])">
+                            <p:graphicImage value="/image/delete.gif"/>
+                            <p:ajax event="click" update="cityPanel" />
+                            <f:setPropertyActionListener value="#{test}" target="#{testView.selectedTest}" />
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        <p:dialog message="添加城市信息" header="城市信息" severity="alert"  widgetVar="cdAdd" appendToBody="true" modal="true">
+            <h:form>
+                <p:panelGrid  id="addOperator" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel for="addJobGroup" value="JobGroup:" />
+                    <h:inputText id="addJobGroup" value="#{testView.cityName}" />
+
+                    <h:outputLabel for="addJobName" value="JobName:" />
+                    <h:inputText id="addJobName" value="#{testView.cityName}" />
+
+                    <h:outputLabel for="addCronExpression" value="CronExpression:" />
+                    <h:inputText id="addCronExpression" value="#{testView.cityName}" />
+
+                    <p:commandButton value="添加" actionListener="#{testView.addCity}" update="@([id$=cityList])" oncomplete="cdAdd.hide()"/>
+                    <p:commandButton value="取消" onclick="cdAdd.hide();" type="button" />
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <p:dialog message="修改城市信息" header="城市信息" severity="alert"  widgetVar="cd" appendToBody="true" modal="true">
+            <h:form>
+                <p:panelGrid  id="modifyOperator" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel for="citytname" value="Firstname:" />
+                    <h:inputText id="citytname" value="#{testView.selectedTest.f2}" />
+                    <p:commandButton value="修改" actionListener="#{testView.modifyCity}" update="@([id$=cityList])" oncomplete="cd.hide()"/>
+                    <p:commandButton value="取消" onclick="cd.hide();" type="button" />
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <p:dialog message="修改城市信息" header="城市信息" severity="alert"  widgetVar="cdDelete" appendToBody="true" modal="true">
+            <h:form>
+                <p:panelGrid  id="del" columns="2" style="margin-bottom:10px">
+                    <p:commandButton value="删除" actionListener="#{testView.deleteCity}" update="@([id$=cityList])" oncomplete="cdDelete.hide()"/>
+                    <p:commandButton value="取消" onclick="cdDelete.hide();" type="button" />
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

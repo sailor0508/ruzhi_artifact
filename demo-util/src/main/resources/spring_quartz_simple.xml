@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- 被执行类 -->
+    <bean id="testQuarzt" class="com.ruzhi.demo.util.spring.quartz.simple.TestQuartz"/>
+
+    <!-- 将testQuarzt注入到job中 -->
+    <!-- 使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法-->
+    <bean id="testQuartzJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testQuarzt"/>
+        <property name="targetMethod" value="doSomething"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <!-- 将job注入到定时触发器 将原来的**TriggerBean替换成**TriggerFactoryBean ,否则会报错-->
+    <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testQuartzJob"/>
+        <property name="cronExpression">
+            <value>0/10 * * * * ?</value>
+        </property>
+    </bean>
+
+    <!-- 将定时触发器注入任务工程 -->
+    <bean id="simpleSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="testTrigger" />
+            </list>
+        </property>
+    </bean>
+
+    <!--空的任务工程，需要在程序中设置触发器-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+    <!--<bean id="scheduleJobService" class="com.ruzhi.demo.util.spring.quartz.ScheduleJobService"/>-->
+</beans>

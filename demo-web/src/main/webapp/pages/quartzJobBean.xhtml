@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+    <h:head>
+
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+            <p:panel id="jobList">
+
+                <h:commandButton actionListener="#{quartzJobBean.flash}" id="flash" update="jobList" value="flash"/>
+                <h:commandButton actionListener="#{quartzJobBean.add}" id="add" update="jobList" value="add"/>
+                <h:outputText value="#{quartzJobBean.i}"/>
+
+                <p:dataTable var="standForScheduleJobVo" value="#{quartzJobBean.standForScheduleJobVos}"
+                             id="standForScheduleJobVosfield">
+                    <p:column headerText="jobGroup" style="width: 100px">
+                        <h:outputText value="#{standForScheduleJobVo.jobGroup}"/>
+                    </p:column>
+                    <p:column headerText="jobName" style="width: 70px">
+                        <h:outputText value="#{standForScheduleJobVo.jobName}"/>
+                    </p:column>
+                    <p:column headerText="cronExpression" style="width: 80px">
+                        <h:outputText value="#{standForScheduleJobVo.cronExpression}"/>
+                    </p:column>
+                    <p:column headerText="status" style="width: 50px">
+                        <h:outputText value="#{standForScheduleJobVo.status}"/>
+                    </p:column>
+                    <p:column headerText="desc" style="width: 100px">
+                        <h:outputText value="#{standForScheduleJobVo.description}"/>
+                    </p:column>
+                    <p:column headerText="standFor操作" style="width: 200px">
+
+                       <!-- <p:commandLink oncomplete="cdModify.show()" title="修改" update="@([id$=modifyOperator])">
+                            <h:graphicImage value="../image/edit.jpg"/>
+                            <p:ajax event="click" update="@([id$=modifyOperator])"/>
+                            <f:setPropertyActionListener value="#{standForScheduleJobVo}" target="#{quartzJobBean.scheduleJobVo}"/>
+                        </p:commandLink>-->
+
+                        <h:commandButton actionListener="#{quartzJobBean.runOnce}" update="jobList" value="run"/>
+                        <h:commandButton actionListener="#{quartzJobBean.pause}" update="jobList" value="pause"/>
+                        <h:commandButton actionListener="#{quartzJobBean.del}" update="jobList" value="del"/>
+                        <h:commandButton actionListener="#{quartzJobBean.modify}" update="jobList" value="modify"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+        <p:dialog message="添加Job" header="Job信息" severity="alert" widgetVar="cdModify" appendToBody="true" modal="true" name="cdModify">
+            <h:form>
+                <p:panelGrid id="modifyOperator" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel for="modifyCronExpression" value="CronExpression:"/>
+                    <h:inputText id="modifyCronExpression" value="#{scheduleJobVo.cronExpression}"/>
+
+                    <h:commandButton value="添加" actionListener="#{quartzJobBean.modify}" update="@([id$=jobList])"
+                                     oncomplete="cdModify.hide()"/>
+                    <h:commandButton value="取消" onclick="cdModify.hide();" type="button"/>
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog message="添加Job" header="Job信息" severity="alert" widgetVar="cdAdd" name="cdAdd" appendToBody="true" modal="true">
+            <h:form>
+                <p:panelGrid id="addOperator" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel for="addJobGroup" value="JobGroup:"/>
+                    <h:inputText id="addJobGroup" value="#{quartzJobBean.jobGroup}"/>
+
+                    <h:outputLabel for="addJobName" value="JobName:"/>
+                    <h:inputText id="addJobName" value="#{quartzJobBean.jobName}"/>
+
+                    <h:outputLabel for="addCronExpression" value="CronExpression:"/>
+                    <h:inputText id="addCronExpression" value="#{quartzJobBean.cronExpression}"/>
+
+                    <h:commandButton value="添加" actionListener="#{quartzJobBean.add}" update="@([id$=jobList])"
+                                     oncomplete="cdAdd.hide()"/>
+                    <h:commandButton value="取消" onclick="cdAdd.hide();" type="button"/>
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+
+</f:view>
+</HTML>

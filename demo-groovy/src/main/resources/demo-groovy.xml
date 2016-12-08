@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<context:property-placeholder location="classpath:context.properties" />
+	
+	<!-- 基础的服务通过组件扫描载入 -->
+	<context:component-scan base-package="com.ruzhi.demo.groovy.service" />
+
+	<!-- Spring Task的配置，用于定时检查规则配置文件的变更 -->
+	<task:annotation-driven />
+
+</beans>

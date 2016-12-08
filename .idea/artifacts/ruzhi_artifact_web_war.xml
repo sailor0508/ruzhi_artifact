@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ruzhi_artifact_web:war">
+    <output-path>$PROJECT_DIR$/demo-web/target</output-path>
+    <root id="archive" name="ruzhi_artifact.war">
+      <element id="artifact" artifact-name="ruzhi_artifact_web:war exploded" />
+    </root>
+  </artifact>
+</component>

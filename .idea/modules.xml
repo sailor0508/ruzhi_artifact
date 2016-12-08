@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/demo-aop.iml" filepath="$PROJECT_DIR$/demo-aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruzhi_artifact.iml" filepath="$PROJECT_DIR$/ruzhi_artifact.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-aop/ruzhi_artifact_aop.iml" filepath="$PROJECT_DIR$/demo-aop/ruzhi_artifact_aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-client/ruzhi_artifact_client.iml" filepath="$PROJECT_DIR$/demo-client/ruzhi_artifact_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-core/ruzhi_artifact_core.iml" filepath="$PROJECT_DIR$/demo-core/ruzhi_artifact_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-groovy/ruzhi_artifact_groovy.iml" filepath="$PROJECT_DIR$/demo-groovy/ruzhi_artifact_groovy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-service/ruzhi_artifact_service.iml" filepath="$PROJECT_DIR$/demo-service/ruzhi_artifact_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-test/ruzhi_artifact_test.iml" filepath="$PROJECT_DIR$/demo-test/ruzhi_artifact_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-util/ruzhi_artifact_util.iml" filepath="$PROJECT_DIR$/demo-util/ruzhi_artifact_util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-web/ruzhi_artifact_web.iml" filepath="$PROJECT_DIR$/demo-web/ruzhi_artifact_web.iml" />
+    </modules>
+  </component>
+</project>

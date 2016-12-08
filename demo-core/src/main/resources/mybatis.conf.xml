@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="proxyFactory" value="JAVASSIST"/>
+        <setting name="logImpl" value="SLF4J" />
+
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="defaultStatementTimeout" value="25000" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="String[]"            type="[Ljava.lang.String;" />
+        <!--<typeAlias alias="JSONTypeHandler"     type="com.ruzhi.demo.typeHandler.JSONTypeHandler" />
+        <typeAlias alias="TextArrayTypeHandler" type="com.ruzhi.demo.typeHandler.TextArrayTypeHandler" />-->
+        <typeAlias alias="Deliver" type="com.ruzhi.demo.core.test.Deliver"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <package name="com.ruzhi.demo.util"/>
+    </typeHandlers>
+
+    <plugins>
+
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="postgresql"/>
+            <property name="offsetAsPageNum" value="true"/>
+            <property name="rowBoundsWithCount" value="false"/>
+            <property name="pageSizeZero" value="false"/>
+            <property name="reasonable" value="false"/>
+        </plugin>
+
+    </plugins>
+</configuration>
