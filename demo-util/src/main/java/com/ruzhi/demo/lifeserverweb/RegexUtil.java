@@ -29,6 +29,7 @@ public class RegexUtil {
 			log.info("[RegexUtil.getMatcher]-- " + matcher.group(0));
 			targetList.add(matcher.group(0));
 		}
+
 		return targetList;
 	}
 
