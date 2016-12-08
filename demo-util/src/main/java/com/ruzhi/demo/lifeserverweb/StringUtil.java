@@ -171,6 +171,7 @@ public class StringUtil extends StringUtils {
                 isGBK = false;
             }
         }
+
         return isGBK;
     }
 
